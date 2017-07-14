@@ -1,0 +1,26 @@
+{
+    "name": "leegoway/mina",
+    "description": "小程序登录 php composer",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "leegoway",
+            "email": "leego.sir@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "leegoway\\mina\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "leegoway\\mina\\examples\\": "examples/"
+        }
+    }
+}
