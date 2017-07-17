@@ -23,9 +23,6 @@ class SessionService
 	//小程序sessionid的名字
 	private $sessionKey = 'minaSessionid';
 
-	//sessionid存储
-	private $store;
-
 	private $timeout = 5;
 
 	//构造方法，传递设置进行初始化
@@ -67,30 +64,21 @@ class SessionService
         }
         $sessionKey = $reqData['session_key'];
         $openId = $reqData['openid'];
-        $sessionId = $this->randomFromDev();
-        $this->store($sessionId, $sessionKey, $openId);
-        return $sessionId;
+        $sessionId = $this->generate_secret_key();
+        return array($sessionId, $sessionKey, $openId);
 	}
 
 	/**
-     * 读取/dev/urandom获取随机数
-     * @param $len
-     * @return mixed|string
-     */
-    public function randomFromDev($len = 16) {
-        $fp = @fopen('/dev/urandom','rb');
-        $result = '';
-        if ($fp !== FALSE) {
-            $result .= @fread($fp, $len);
-            @fclose($fp);
-        }
-        else {
-            trigger_error('Can not open /dev/urandom.');
-        }
-        // convert from binary to string
-        $result = base64_encode($result);
-        // remove none url chars
-        $result = strtr($result, '+/', '-_');
-        return substr($result, 0, $len);
-    }
+	 * Generates a 16 digit secret key in base32 format
+	 * @return string
+	 **/
+	public static function generate_secret_key($length = 16) {
+		$b32 	= "234567QWERTYUIOPASDFGHJKLZXCVBNM";
+		$s 	= "";
+
+		for ($i = 0; $i < $length; $i++)
+			$s .= $b32[rand(0,31)];
+
+		return $s;
+	}
 }
