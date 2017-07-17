@@ -12,7 +12,7 @@ class SessionService
 {
 
 	//小程序登录地址
-	private $url = 'https://api.weixin.qq.com/sns/jscode2session';
+	private $url = 'https://api.weixin.qq.com/sns/jscode2session?';
 
 	//小程序appid
 	private $appid = 'your appid';
@@ -65,7 +65,7 @@ class SessionService
         $sessionKey = $reqData['session_key'];
         $openId = $reqData['openid'];
         $sessionId = $this->generate_secret_key();
-        return array($sessionId, $sessionKey, $openId);
+        return array('sessionId' => $sessionId, 'sessionKey' => $sessionKey, 'openId' => $openId);
 	}
 
 	/**

@@ -16,13 +16,13 @@ class RedisStore implements StoreInterface
 
 	public function store($sessionId, $sessionKey, $openId)
 	{
-		$this->redisComponent->hmset($this->prefix . $sessionId, array('openId' =>$openId, 'sessionKey' => $sessionKey));
+		$this->redisComponent->hmset($this->prefix . $sessionId, 'openId', $openId, 'sessionKey', $sessionKey);
 		$this->redisComponent->expire($this->prefix . $sessionId, $this->expireSeconds);
 		return true;
 	}
 
 	public function get($sessionId)
 	{
-		return $this->redisComponent->hmget($this->prefix . $sessionId, array('openId'));
+		return $this->redisComponent->hmget($this->prefix . $sessionId, 'openId', 'sessionKey');
 	}
 }

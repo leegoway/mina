@@ -38,8 +38,10 @@ return [
 ```php
 
 $code = 'your code';//小程序本次回话code 
-$sessionInfo = Yii::$app->minaAuth->getSessionId($code);
+$sessionInfo = Yii::$app->minaAuth->getSessionInfo($code);
 //return ['sessionId' => '', 'sessionKey' => '', 'openId' => ''];
 $openId = Yii::$app->minaAuth->getOpenId($sessionInfo['sessionId']);
 //return openid
+$sessionKey = Yii::$app->minaAuth->getSessionKey($sessionInfo['sessionId']);
+//return sessionKey
 ```

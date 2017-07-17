@@ -28,13 +28,13 @@ class MinaFacade extends Component
 		$this->sessionService = new SessionService(['appid' => $this->appid, 'appsecret' => $this->appsecret]);
 	}
 
-	public function getSessionId($code) 
+	public function getSessionInfo($code) 
 	{
 		$result = null;
 		$sessionInfo = $this->sessionService->getSessionId($code);
 		if ( 3 == count($sessionInfo) ) {
 			$this->storeHandler->store($sessionInfo['sessionId'], $sessionInfo['sessionKey'], $sessionInfo['openId']);
-			$result = $sessionInfo['sessionId'];
+			$result = $sessionInfo;
 		}
 		return $result;
 	}
@@ -42,7 +42,13 @@ class MinaFacade extends Component
 	public function getOpenId($sessionId)
 	{
 		$info = $this->storeHandler->get($sessionId);
-		return $info['openId'];
+		return isset($info['openId']) ? $info['openId'] : null;
+	}
+
+	public function getSessionKey($sessionId)
+	{
+		$info = $this->storeHandler->get($sessionId);
+		return isset($info['sessionKey']) ? $info['sessionKey'] : null;
 	}
 
 }
