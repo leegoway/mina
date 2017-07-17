@@ -23,6 +23,7 @@ class RedisStore implements StoreInterface
 
 	public function get($sessionId)
 	{
-		return $this->redisComponent->hmget($this->prefix . $sessionId, 'openId', 'sessionKey');
+		$vals = $this->redisComponent->hmget($this->prefix . $sessionId, 'openId', 'sessionKey');
+		return array('openId' => $vals[0], 'sessionKey' => $vals[1]);
 	}
 }
