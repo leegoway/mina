@@ -15,7 +15,7 @@ class SessionService
 	private $url = 'https://api.weixin.qq.com/sns/jscode2session';
 
 	//小程序appid
-	private $appid = 'your appid',
+	private $appid = 'your appid';
 
 	//小程序appsecret
 	private $appsecret = 'your appsecret';

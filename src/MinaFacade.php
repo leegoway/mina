@@ -30,12 +30,13 @@ class MinaFacade extends Component
 
 	public function getSessionId($code) 
 	{
+		$result = null;
 		$sessionInfo = $this->sessionService->getSessionId($code);
 		if ( 3 == count($sessionInfo) ) {
 			$this->storeHandler->store($sessionInfo['sessionId'], $sessionInfo['sessionKey'], $sessionInfo['openId']);
-		} else {
-			throw new \Exception('获取session值失败');
+			$result = $sessionInfo['sessionId'];
 		}
+		return $result;
 	}
 
 	public function getOpenId($sessionId)

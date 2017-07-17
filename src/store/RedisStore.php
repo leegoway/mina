@@ -2,7 +2,7 @@
 
 namespace leegoway\mina\store;
 
-class RedisStore impliments StoreInterface
+class RedisStore implements StoreInterface
 {
 	private $redisComponent;
 	private $prefix = 'mina';
@@ -16,7 +16,7 @@ class RedisStore impliments StoreInterface
 
 	public function store($sessionId, $sessionKey, $openId)
 	{
-		$this->redisComponent->hmset($this->prefix . $sessionId, array('openId' =>$openId, 'sessionKey' => $sessionKey]));
+		$this->redisComponent->hmset($this->prefix . $sessionId, array('openId' =>$openId, 'sessionKey' => $sessionKey));
 		$this->redisComponent->expire($this->prefix . $sessionId, $this->expireSeconds);
 		return true;
 	}
