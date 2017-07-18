@@ -12,13 +12,13 @@ class StoreFactory
 {
 	public static function getStoreHandler($config)
 	{
-		if(empty($config['handler'])){
-			throw new \Exception('please set store handler class first');
-		} elseif ($config['handler'] == 'redis') {
+		if(empty($config['driver'])){
+			throw new \Exception('please set store driver class first');
+		} elseif ($config['driver'] == 'redis') {
 			$componentName = $config['component'];
 			return new RedisStore(Yii::$app->$componentName, $config['expireSeconds']);
 		} else {
-			throw new \Exception('not supported handler:' . $config['handler']);
+			throw new \Exception('not supported driver:' . $config['driver']);
 		}
 	}
 }

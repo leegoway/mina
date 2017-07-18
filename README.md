@@ -6,6 +6,8 @@ PHP mina login 小程序登录 PHP composer 包
 
 ### 基础使用
 
+    使用SessionService类调用微信小程序接口，获取sessionKey和openId
+
 ```php
 use leegoway\mina\SessionService;
 
@@ -17,7 +19,7 @@ $sessionInfo = $sessionService->getSessionId($code);
 //return ['sessionId' => '', 'sessionKey' => '', 'openId' => ''];
 ```
 
-### Yii2使用
+### 作为Yii2的component使用
 ```php
 return [
     'components' => [
@@ -26,7 +28,7 @@ return [
             'appid' => 'your appid',
             'appsecret' => 'your appsecret',
             'storeconfig' => [
-            	'handler' => 'redis',   //存储类型
+            	'driver' => 'redis',   //存储类型
             	'component' => 'redis', //yii2的component
             	'expireSeconds' => 900, //session有效时间
             ], 
